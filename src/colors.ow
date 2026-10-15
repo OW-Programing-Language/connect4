@@ -1,0 +1,21 @@
+# Free helper functions shared by the game.
+fn name(p):
+  if: p == 1
+    return: "Red"
+  else:
+    return: "Yellow"
+
+fn other(p):
+  if: p == 1
+    return: 2
+  else:
+    return: 1
+
+fn color_name(v):
+  switch: v
+    case 1:
+      return: "red"
+    case 2:
+      return: "yellow"
+    default:
+      return: "empty"

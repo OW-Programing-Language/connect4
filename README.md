@@ -1,0 +1,33 @@
+# Connect 4 (Ow)
+
+A clickable Connect 4 game with a modern UI (web or native desktop).
+
+Written in **[Ow](https://github.com/OW-Programing-Language/ow-lang)** in an
+object-oriented style — **one class per file**.
+
+## Structure
+
+```
+src/
+  Board.ow     # class Board — 6x7 grid, drop + 4-in-a-row detection
+  colors.ow    # name(), other(), color_name() helpers
+  Game.ow      # class Game — turn state, rules, renders the UI
+  main.ow      # entry point (main)
+```
+
+## Run it
+
+Install Ow (download from the
+[ow-lang releases](https://github.com/OW-Programing-Language/ow-lang/releases) —
+the native installer needs no Java), then:
+
+```sh
+ow run src/main.ow
+```
+
+Or open `src/main.ow` in **OwIDE** and press **Run ▶** (or **UI Native ▶** /
+**UI Web ▶** for the graphical versions).
+
+## License
+
+[MIT](LICENSE).

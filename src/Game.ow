@@ -1,0 +1,57 @@
+import "Board.ow"
+import "colors.ow"
+
+# Holds all game state and rules; renders itself as a UI.
+class Game:
+  field board
+  field player
+  field winner_val
+  field status
+
+  fn new():
+    call: this.reset()
+
+  fn reset():
+    set this.board: new Board()
+    set this.player: 1
+    set this.winner_val: 0
+    set this.status: "Red's turn — click a column"
+
+  fn drop(col):
+    if: this.winner_val != 0
+      return: 0
+    set landed int: this.board.drop(col, this.player)
+    if: landed == 0 - 1
+      return: 0
+    set w int: this.board.winner()
+    if: w != 0
+      set this.winner_val: w
+      set this.status: name(w) + " wins! 🎉"
+    else:
+      set this.player: other(this.player)
+      set this.status: name(this.player) + "'s turn"
+    return: 0
+
+  fn columns():
+    set btns: array(7, 0)
+    set c int: 0
+    while: c < 7
+      set btns[c]: ui_button("" + (c + 1), "game.drop", c)
+      set c: c + 1
+    return: btns
+
+  fn discs():
+    set cells: array(42, 0)
+    set i int: 0
+    set r int: 0
+    while: r < 6
+      set c int: 0
+      while: c < 7
+        set cells[i]: ui_disc(color_name(this.board.get(r, c)))
+        set i: i + 1
+        set c: c + 1
+      set r: r + 1
+    return: cells
+
+  fn view():
+    return: ui_col([ui_heading("Connect 4"), ui_text(this.status), ui_row(this.columns()), ui_grid(7, this.discs()), ui_button("New game", "game.reset")])
